@@ -1,4 +1,4 @@
-module markitos-svc-access
+module markitos-service-access
 
 go 1.23.4
 

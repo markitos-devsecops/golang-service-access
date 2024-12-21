@@ -1,218 +1,157 @@
-# Golang Microservice Userplate
+# Markitos SVC Access
 
-Este repositorio es una **plantilla para crear microservicios en Golang**, diseñada con **prácticas de DevSecOps** en mente. La plantilla está orientada a la seguridad desde el primer momento del ciclo de vida del desarrollo, lo que incluye análisis estáticos de seguridad (SAST), pruebas automatizadas y un diseño modular que facilita la escalabilidad.
-
-Este userplate tiene como objetivo ser una solución robusta para comenzar a desarrollar microservicios de manera eficiente, asegurando las mejores prácticas de **seguridad** y **pruebas**. Además, se ha diseñado para ser fácilmente extensible y adaptable.
-
-**¡Contribuciones, sugerencias y críticas son bienvenidas!** Si te interesa aprender más sobre **DevSecOps** y seguridad en el ciclo de vida del software, puedes seguir mi canal de YouTube:
-
-[markitos_devsecops](https://www.youtube.com/@markitos_devsecops)
-
----
-
-## Características Principales
-
-- **Estructura Modular**: Separa las funcionalidades en capas, lo que facilita el mantenimiento y la escalabilidad del microservicio.
-- **Seguridad Integrada**: Implementa prácticas de **DevSecOps** para garantizar la seguridad del código desde el principio, con herramientas de análisis de seguridad como **Semgrep** y **Gitleaks**.
-- **Automatización de Pruebas**: Incluye pruebas unitarias, de integración y de seguridad automatizadas.
-- **Contenedores Docker**: Se proporciona soporte para Docker, lo que facilita la creación de contenedores para el desarrollo y el despliegue.
-- **PostgreSQL y Migraciones**: Implementación de base de datos con PostgreSQL y migraciones automatizadas mediante herramientas como **Migrate** y **sqlc**.
-- **Arquitectura RESTful**: Exposición de API RESTful utilizando **Gin**, un framework web para Go.
-- **CI/CD con Makefile**: El proyecto incluye un `Makefile` para facilitar la construcción, el análisis estático de seguridad, las migraciones de base de datos, la ejecución de pruebas, entre otras tareas.
-
----
+Markitos SVC Access es un servicio de acceso que permite la gestión de usuarios a través de una API RESTful.
 
 ## Estructura del Proyecto
 
-El proyecto sigue las mejores prácticas de desarrollo modular para microservicios. La estructura de directorios está organizada en capas que separan la lógica de dominio, infraestructura y servicios. Además, incluye un directorio `testsuite` para pruebas.
-
 ```
-golang-microservice-userplate/
-├── internal/                      # Lógica interna del microservicio
-│   ├── domain/                    # Entidades y lógica de dominio
-│   ├── infrastructure/            # Implementación de infraestructuras (API, base de datos, etc.)
-│   ├── services/                  # Lógica de los servicios del microservicio
-├── testsuite/                     # Tests, incluyendo pruebas de seguridad
-│   ├── internal/infrastructure    # Tests de infraestructuras (API, base de datos, etc.)
-│   ├── internal/domain/           # Tests para la capa de dominio
-│   └── internal/services/         # Tests para los servicios
-├── Makefile                       # Comandos útiles para construir, probar y analizar el proyecto
-├── go.mod                         # Gestión de dependencias en Go
-├── go.sum                         # Archivo de suma de dependencias
-└── README.md                      # Este archivo
+.
+├── .gitignore
+├── Dockerfile
+├── go.mod
+├── go.sum
+├── internal/
+│   ├── domain/
+│   │   ├── errors.go
+│   │   ├── helper.go
+│   │   ├── inmemory.repository.go
+│   │   ├── models.go
+│   │   ├── repository.go
+│   │   └── types.go
+│   ├── infrastructure/
+│   │   ├── api/
+│   │   │   ├── handlers.go
+│   │   │   └── server.go
+│   │   └── database/
+│   │       └── postgres.repository.go
+│   └── services/
+│       ├── create.go
+│       ├── list.go
+│       ├── one.go
+│       ├── search.go
+│       └── update.go
+├── LICENSE
+├── main.go
+├── Makefile
+├── README.md
+└── testsuite/
+    ├── internal/
+    │   ├── domain/
+    │   │   ├── inmemory.repository_test.go
+    │   │   ├── main_test.go
+    │   │   ├── models_test.go
+    │   │   └── mtools_test.go
+    │   ├── infrastructure/
+    │   │   ├── api/
+    │   │   │   ├── create_test.go
+    │   │   │   ├── list_test.go
+    │   │   │   ├── main_test.go
+    │   │   │   ├── one_test.go
+    │   │   │   └── search_test.go
+    │   │   └── database/
+    │       └── postgres.repository_test.go
+    └── services/
+        ├── create_test.go
+        ├── list_test.go
+        ├── main_test.go
+        ├── one_test.go
+        └── update_test.go
 ```
-
----
-
-## Requisitos
-
-- **Go 1.18+**: Necesitas tener Go 1.18 o superior instalado.
-- **Docker**: Se recomienda usar Docker para ejecutar el microservicio en contenedores.
-- **PostgreSQL**: Si deseas usar una base de datos PostgreSQL para tu microservicio.
-
----
 
 ## Instalación
 
-### 1. Clonar el Repositorio
+1. Clona el repositorio:
+    ```sh
+    git clone https://github.com/tu-usuario/markitos-svc-access.git
+    cd markitos-svc-access
+    ```
 
-```bash
-git clone https://github.com/markitos-devsecops/golang-microservice-userplate.git
-cd golang-microservice-userplate
+2. Instala las dependencias:
+    ```sh
+    go mod download
+    ```
+
+## Uso
+
+### Ejecutar el servidor
+
+Para ejecutar el servidor, usa el siguiente comando:
+```sh
+go run .
 ```
 
-### 2. Instalar Dependencias
+El servidor estará disponible en `http://localhost:3000`.
 
-Este proyecto usa **Go Modules** para gestionar dependencias. Para descargarlas, ejecuta:
+### Rutas de la API
 
-```bash
-go mod tidy
+- **Crear un usuario**
+    ```http
+    POST /users
+    ```
+    **Body:**
+    ```json
+    {
+        "message": "Test User"
+    }
+    ```
+
+- **Listar todos los usuarios**
+    ```http
+    GET /users/all
+    ```
+
+- **Obtener un usuario por ID**
+    ```http
+    GET /users/:id
+    ```
+
+- **Actualizar un usuario**
+    ```http
+    PUT /users/:id
+    ```
+    **Body:**
+    ```json
+    {
+        "message": "Updated User"
+    }
+    ```
+
+- **Buscar usuarios**
+    ```http
+    GET /users?search=Test&page=1&size=10
+    ```
+
+### Pruebas
+
+Para ejecutar las pruebas, usa el siguiente comando:
+```sh
+go test ./...
 ```
 
-### 3. Ejecutar el Microservicio
+## Docker
 
-Puedes iniciar el microservicio de forma local con el siguiente comando:
+Para construir y ejecutar la imagen Docker, usa los siguientes comandos:
 
-```bash
-go run internal/app/main.go
-```
+1. Construir la imagen:
+    ```sh
+    docker build -t markitos-svc-access .
+    ```
 
-Esto ejecutará el microservicio en **http://localhost:3000**.
+2. Ejecutar el contenedor:
+    ```sh
+    docker run -p 3000:3000 markitos-svc-access
+    ```
 
-### 4. Usar Docker (opcional)
+## Contribuir
 
-Si prefieres ejecutar el microservicio dentro de un contenedor Docker, puedes construir la imagen y ejecutar el contenedor con:
+Si deseas contribuir a este proyecto, por favor sigue los siguientes pasos:
 
-```bash
-docker build -t golang-microservice .
-docker run -p 3000:3000 golang-microservice
-```
-
----
-
-## Comandos Makefile
-
-El `Makefile` incluye una serie de comandos útiles para automatizar tareas comunes como pruebas, migraciones de bases de datos, análisis de seguridad y construcción de imágenes Docker.
-
-### Comandos de Ejecución
-
-- **Ejecutar el microservicio**:
-  ```bash
-  make run
-  ```
-
-### Comandos de Pruebas
-
-- **Ejecutar pruebas (todos los tests)**:
-  ```bash
-  make test
-  ```
-
-- **Ejecutar pruebas con salida detallada**:
-  ```bash
-  make testv
-  ```
-
-### Comandos de Migraciones de Base de Datos
-
-- **Crear la base de datos**:
-  ```bash
-  make createdb
-  ```
-
-- **Eliminar la base de datos**:
-  ```bash
-  make dropdb
-  ```
-
-- **Ejecutar migraciones**:
-  ```bash
-  make migrate-up
-  ```
-
-- **Deshacer la última migración**:
-  ```bash
-  make migrate-down
-  ```
-
-### Comandos de Seguridad (DevSecOps)
-
-- **Análisis estático de seguridad con Semgrep (SAST)**:
-  ```bash
-  make appsec-sast-sca
-  ```
-
-- **Detectar secretos expuestos con Gitleaks**:
-  ```bash
-  make appsec-gitleaks
-  ```
-
-### Comandos de Construcción de Imágenes Docker
-
-- **Construir la imagen Docker**:
-  ```bash
-  make image-build
-  ```
-
-- **Subir la imagen a GitHub Container Registry**:
-  ```bash
-  make image-push
-  ```
-
----
-
-## Pruebas
-
-El proyecto incluye pruebas unitarias e integradas que cubren tanto la lógica de negocio como las interacciones con la base de datos. Además, el **Makefile** permite ejecutar análisis de seguridad, pruebas de integración y otras pruebas relevantes de manera automatizada.
-
-Para ejecutar las pruebas de seguridad y las pruebas regulares, puedes usar:
-
-```bash
-make test
-make security
-```
-
-### Pruebas de Seguridad
-
-El proyecto integra herramientas como **Semgrep** para el análisis estático del código y **Gitleaks** para detectar secretos expuestos en el código fuente.
-
----
-
-## Contribución
-
-Este proyecto es una propuesta abierta y cualquier contribución es bienvenida. Si tienes sugerencias, mejoras o correcciones de seguridad, siéntete libre de abrir un **issue** o **pull request**.
-
-Para contribuir:
-
-1. Haz un **fork** del repositorio.
-2. Crea una rama para tu nueva funcionalidad o corrección de errores:
-   ```bash
-   git checkout -b feature/nueva-funcionalidad
-   ```
-3. Realiza tus cambios y asegúrate de que todas las pruebas pasen:
-   ```bash
-   go test ./...
-   ```
-4. Haz un **commit** de tus cambios:
-   ```bash
-   git commit -am 'Agrega nueva funcionalidad'
-   ```
-5. Haz **push** a tu rama:
-   ```bash
-   git push origin feature/nueva-funcionalidad
-   ```
-6. Crea un **pull request**.
-
----
+1. Haz un fork del repositorio.
+2. Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
+3. Realiza tus cambios y haz commit (`git commit -am 'Añadir nueva funcionalidad'`).
+4. Sube tus cambios (`git push origin feature/nueva-funcionalidad`).
+5. Abre un Pull Request.
 
 ## Licencia
 
-Este proyecto está bajo la licencia **MIT**. Consulta el archivo [LICENSE](LICENSE) para más detalles.
-
----
-
-## Canal de YouTube
-
-Si te interesa aprender más sobre **DevSecOps**, **seguridad en aplicaciones** y buenas prácticas de desarrollo de software, puedes seguir mi canal de YouTube:
-
-[markitos_devsecops](https://www.youtube.com/@markitos_devsecops)
+Este proyecto está licenciado bajo la Licencia GNU General Public License v3.0. Consulta el archivo [LICENSE](LICENSE) para más detalles.
