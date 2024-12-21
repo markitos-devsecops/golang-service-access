@@ -1,8 +1,8 @@
 package services_test
 
 import (
-	"markitos-svc-access/internal/domain"
-	"markitos-svc-access/internal/services"
+	"markitos-service-access/internal/domain"
+	"markitos-service-access/internal/services"
 	"os"
 	"testing"
 )

@@ -1,7 +1,7 @@
 package services
 
 import (
-	"markitos-svc-access/internal/domain"
+	"markitos-service-access/internal/domain"
 )
 
 type UserOneRequest struct {

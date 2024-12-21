@@ -1,7 +1,7 @@
 package domain_test
 
 import (
-	"markitos-svc-access/internal/domain"
+	"markitos-service-access/internal/domain"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

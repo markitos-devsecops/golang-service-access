@@ -2,8 +2,8 @@ package services_test
 
 import (
 	"errors"
-	"markitos-svc-access/internal/domain"
-	"markitos-svc-access/internal/services"
+	"markitos-service-access/internal/domain"
+	"markitos-service-access/internal/services"
 	"testing"
 
 	"github.com/stretchr/testify/require"

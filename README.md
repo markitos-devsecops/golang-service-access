@@ -62,8 +62,8 @@ Markitos SVC Access es un servicio de acceso que permite la gestión de usuarios
 
 1. Clona el repositorio:
     ```sh
-    git clone https://github.com/tu-usuario/markitos-svc-access.git
-    cd markitos-svc-access
+    git clone https://github.com/tu-usuario/markitos-service-access.git
+    cd markitos-service-access
     ```
 
 2. Instala las dependencias:
@@ -134,12 +134,12 @@ Para construir y ejecutar la imagen Docker, usa los siguientes comandos:
 
 1. Construir la imagen:
     ```sh
-    docker build -t markitos-svc-access .
+    docker build -t markitos-service-access .
     ```
 
 2. Ejecutar el contenedor:
     ```sh
-    docker run -p 3000:3000 markitos-svc-access
+    docker run -p 3000:3000 markitos-service-access
     ```
 
 ## Contribuir

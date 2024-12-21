@@ -2,8 +2,8 @@ package database_test
 
 import (
 	"log"
-	"markitos-svc-access/internal/domain"
-	"markitos-svc-access/internal/infrastructure/database"
+	"markitos-service-access/internal/domain"
+	"markitos-service-access/internal/infrastructure/database"
 	"testing"
 	"time"
 
@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	APP_BBDD_DSN string = "host=localhost user=admin password=admin dbname=markitos-svc-access sslmode=disable TimeZone=Europe/Madrid port=5432 sslmode=disable"
+	APP_BBDD_DSN string = "host=localhost user=admin password=admin dbname=markitos-service-access sslmode=disable TimeZone=Europe/Madrid port=5432 sslmode=disable"
 )
 
 func TestUserCreate(t *testing.T) {

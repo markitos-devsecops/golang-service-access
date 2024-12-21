@@ -2,7 +2,7 @@ package domain_test
 
 import (
 	"errors"
-	"markitos-svc-access/internal/domain"
+	"markitos-service-access/internal/domain"
 	"strings"
 	"testing"
 

@@ -1,7 +1,7 @@
 package api
 
 import (
-	"markitos-svc-access/internal/services"
+	"markitos-service-access/internal/services"
 	"net/http"
 	"os"
 	"strconv"

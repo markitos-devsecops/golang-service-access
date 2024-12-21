@@ -1,7 +1,7 @@
 package domain_test
 
 import (
-	"markitos-svc-access/internal/domain"
+	"markitos-service-access/internal/domain"
 	"regexp"
 	"strings"
 	"testing"

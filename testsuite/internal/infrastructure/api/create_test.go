@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"markitos-svc-access/internal/services"
+	"markitos-service-access/internal/services"
 
 	"github.com/stretchr/testify/assert"
 )
