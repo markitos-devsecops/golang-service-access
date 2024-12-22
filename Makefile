@@ -31,11 +31,14 @@ dropdb:
 
 
 #:[.''.]:>-------------------------------------------
-#:[.''.]:><security> TODO: ver como hacerlo con otros
-appsec-sast-sca:
-	docker run --rm -v $(shell pwd):/src returntocorp/semgrep semgrep --config=auto /src --verbose
-appsec-gitleaks:
+#:[.''.]:><security>
+appsec-sast:
+	@if [ -f .semgrepignore ]; then mv .semgrepignore .semgrepignore.bak; fi
+	docker run --rm -v $(shell pwd):/src returntocorp/semgrep semgrep scan --config=auto /src --verbose
+	@if [ -f .semgrepignore.bak ]; then mv .semgrepignore.bak .semgrepignore; fi
+appsec-sca:
 	docker run --rm -v $(shell pwd):/repo zricethezav/gitleaks:latest detect --source /repo
+appsec: appsec-sast appsec-sca
 #:[.''.]:>-------------------------------------------
 
 
